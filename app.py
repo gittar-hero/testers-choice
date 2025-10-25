@@ -110,22 +110,25 @@ st.set_page_config(page_title="Testers Choice", page_icon="🧹", layout="center
 # --- ✨ הוספת CSS לטיפול ב-RTL ומירוכז ✨ ---
 st.markdown("""
 <style>
-/* 1. כופה כיווניות מימין לשמאל על כל האפליקציה */
+/* 1. כופה כיווניות מימין לשמאל על כל האפליקציה (אלמנטים ראשיים) */
 div.st-emotion-cache-1r6r0wz, 
 div.st-emotion-cache-1v0nsdp,
 div.st-emotion-cache-1ky2y50 { 
     direction: rtl;
 }
 
-/* 2. ממקם את הכותרות ואת הטקסט הראשי במרכז */
+/* 2. ממקם את הכותרות ואת הטקסט הראשי במרכז ו-RTL */
 h1 {
     text-align: center;
 }
-.st-emotion-cache-10trblm, 
-.st-emotion-cache-1n76c1l {
+.st-emotion-cache-10trblm, /* כותרת ראשית */
+.st-emotion-cache-1n76c1l, /* טקסט רגיל (st.write) */
+.st-emotion-cache-1c5c02q, /* טקסט סטטוס (st.success/warning/error/info) */
+.st-emotion-cache-1j00e5c { /* הודעות קטנות יותר, למשל בתוך הספינר */
     direction: rtl; 
     text-align: center;
 }
+
 
 /* 3. ממקם תמונות במרכז (עבור הלוגו) */
 .st-emotion-cache-18ni7ap {

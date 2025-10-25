@@ -9,7 +9,7 @@
 </p>
 <p align="center">
   <!-- ⚠️ Update this link once your app is deployed! -->
-  <a href="[https://your-streamlit-app-url.streamlit.app](https://testers-choice.streamlit.app/)"><strong> Try the Live App </strong></a>
+  <a href="https://testers-choice.streamlit.app/"><strong> Try the Live App </strong></a>
 </p>
 
 ---
@@ -37,5 +37,6 @@ This app uses a smart hybrid approach:
 * **High-Quality Cleaning:** Removes the highlighter color without deleting the text underneath.
 
 * **Built with Python:** The entire stack is built with Streamlit, OpenCV, and Ultralytics.
+
 
 

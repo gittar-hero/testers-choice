@@ -104,21 +104,57 @@ def process_pdf_color_clean(images):
 
 # --- 🚀 בניית ממשק המשתמש (החלק של Streamlit) ---
 
-# 1. הגדרת העמוד
+# 1. הגדרת העמוד (ללא שינוי)
 st.set_page_config(page_title="Testers Choice", page_icon="🧹", layout="centered")
 
-# 2. הצגת הלוגו (אם קובץ logo.png קיים)
-if os.path.exists("logo.png"):
-    st.image("logo.png", width=100) 
+# --- ✨ הוספת CSS לטיפול ב-RTL ומירוכז ✨ ---
+st.markdown("""
+<style>
+/* 1. כופה כיווניות מימין לשמאל על כל האפליקציה */
+div.st-emotion-cache-1r6r0wz, 
+div.st-emotion-cache-1v0nsdp,
+div.st-emotion-cache-1ky2y50 { 
+    direction: rtl;
+}
 
+/* 2. ממקם את הכותרות ואת הטקסט הראשי במרכז */
+h1 {
+    text-align: center;
+}
+.st-emotion-cache-10trblm, 
+.st-emotion-cache-1n76c1l {
+    direction: rtl; 
+    text-align: center;
+}
+
+/* 3. ממקם תמונות במרכז (עבור הלוגו) */
+.st-emotion-cache-18ni7ap {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 4. מרכז את הכפתורים ואת תיבת ההעלאה */
+.st-emotion-cache-12fm5qf {
+    align-items: center;
+}
+</style>
+""", unsafe_allow_html=True)
+# --- סוף CSS ---
+
+# 2. הצגת הלוגו (אם קובץ logo.png קיים) - הגדלתי ל-150
+if os.path.exists("logo.png"):
+    st.image("logo.png", width=150) 
+    
+# 3. הכותרות והטקסט שלך (ללא שינוי)
 st.title("Testers Choice")
 st.write("מוחק סימוני תשובות מקבצי פתרון של מבחנים אמריקאיים")
 
-# 3. טעינת המודל
+# 4. טעינת המודל
 model = load_yolo_model(MODEL_PATH)
 
 if model:
-    # 4. כפתור העלאת קובץ
+    # 5. כפתור העלאת קובץ
     uploaded_file = st.file_uploader("ועכשיו עם הקובץ :)", type=["pdf"])
 
     if uploaded_file is not None:
@@ -131,17 +167,17 @@ if model:
             with st.spinner("ממיר PDF לתמונות... (זה לוקח רגע)"):
                 images = convert_from_path(tmp_file_path, dpi=200)
 
-            # 5. בדיקה מקדימה עם המודל
+            # 6. בדיקה מקדימה עם המודל
             is_marked = check_pdf_for_markers(images, model)
 
-            # 6. החלטה וניקוי
+            # 7. החלטה וניקוי
             if is_marked:
                 with st.spinner("הסימונים זוהו. מנקה את הקובץ..."):
                     cleaned_pdf_bytes = process_pdf_color_clean(images)
 
                 st.success("הקובץ נקי מסימונים")
 
-                # 7. כפתור הורדה
+                # 8. כפתור הורדה
                 st.download_button(
                     label= "הקובץ הנקי להורדה",
                     data=cleaned_pdf_bytes,
